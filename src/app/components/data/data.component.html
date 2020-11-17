@@ -1,0 +1,28 @@
+<br>
+<br>
+
+
+<div class="container">
+
+
+    <h1 class="title text-center">Cloud Data</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-jewel btn-block mt-3 mb-4" [routerLink]="['/upload']">Subir archivos  <i class="fas fa-cloud-upload-alt"></i></button>
+            <button class="btn btn-jewel btn-block mt-3 mb-4" [routerLink]="['/crearCarpeta']">Crear carpeta   <i class="fas fa-folder-plus"></i></button>
+        </div>
+    </div>
+
+    <div class="btn btn-void" (click)="goUpDir()" *ngIf="isHome == false"><i class="fas fa-reply"></i> Carpeta anterior</div>
+    <div class="row">
+        <div class="col-md-3 d-inline mt-4" *ngFor="let dir of dirs">
+            <a class="btn btn-fuschia w-100" (click)="dirClick(dir.name)"><i class="fas fa-folder"></i>  {{dir.name}}</a>
+        </div>
+        <div class="col-md-3 d-inline mt-4" *ngFor="let file of files" [routerLink]="['/archivo', file.name]">
+            <span class="btn btn-stark text-fuschia w-100"><i class="fas fa-file-alt"></i>  {{file.name}}</span>
+        </div>
+    </div>
+
+
+
+</div>
