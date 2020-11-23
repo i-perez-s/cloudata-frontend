@@ -1,1 +1,9 @@
-<p>create-dir works!</p>
+<div class="container mt-5">
+  <h1 class="title text-center">Crear Carpeta</h1>
+  <div class="form-group">
+    <label for="nameDir text-center">Nombre de la carpeta:</label>
+    <input class="form-control" id="nameDir" [(ngModel)]="nameNewDir">
+    <button class="btn btn-fuschia btn-block mt-3" (click)="createDir()">Crear</button>
+  </div>
+</div>
+

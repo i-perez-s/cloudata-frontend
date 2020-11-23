@@ -5,7 +5,7 @@ import { routing, appRoutingProviders } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { FormsModule } from '@angular/forms';
 
 import { DataComponent } from './components/data/data.component';
 import { FileComponent } from './components/file/file.component';
@@ -15,6 +15,7 @@ import { UploadFileComponent } from './components/upload-file/upload-file.compon
 import { UploadService } from './upload.service';
 import { DataService } from './data.service';
 import { LinkComponent } from './components/link/link.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +24,15 @@ import { LinkComponent } from './components/link/link.component';
     FileComponent,
     CreateDirComponent,
     UploadFileComponent,
-    LinkComponent
+    LinkComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     routing,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [appRoutingProviders, UploadService, DataService],
   bootstrap: [AppComponent]

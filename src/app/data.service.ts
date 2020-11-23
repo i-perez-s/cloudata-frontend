@@ -21,7 +21,13 @@ export class DataService{
   }
   getFile(filePath: string, fileName: string):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'aplication/json');
+    console.log(this.url + 'getFile/' + filePath + '/' + fileName)
     return this._http.get(this.url + 'getFile/' + filePath + '/' + fileName, {headers: headers});
+  }
+  getFileType(filePath: string, fileName: string):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'aplication/json');
+    console.log(this.url + 'getFile/' + filePath + '/' + fileName)
+    return this._http.get(this.url + 'getFileType/' + filePath + '/' + fileName, {headers: headers});
   }
 
 
@@ -32,4 +38,3 @@ export class DataService{
 
 
 }
-

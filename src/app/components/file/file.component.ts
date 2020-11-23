@@ -11,6 +11,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class FileComponent implements OnInit {
   public dirParam: string;
   public fileDir: string;
+  public url: string = 'http://localhost:8888/';
+  public isImg: boolean;
+  public responseText: string;
+  public responseTextSplitted: any;
 
   public respose: any;
 
@@ -29,12 +33,17 @@ export class FileComponent implements OnInit {
 
   public getData():any {
     this.transformDir();
-    console.log(this.dirParam);
-    this.dataservice.getFile(this.fileDir, this.dirParam).subscribe(
+    this.dataservice.getFileType(this.fileDir, this.dirParam).subscribe(
       response => {
-        console.log(response);
-        this.respose = response;
-
+        if(response.type === 'img' || response.type === 'text'){
+          this.isImg = true
+        } else {
+          this.isImg = false
+        }
+        if (response.type === 'text'){
+          this.responseText = response.data;
+          this.responseTextSplitted = this.responseText.split('\n');
+        }
       },
       err => {
         console.log(err);

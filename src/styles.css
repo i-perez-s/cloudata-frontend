@@ -109,3 +109,18 @@ a:active a:hover {
 .button:hover:after {
     transform: none;
 }
+
+.image {
+    float: left;
+    width: 100%;
+}
+
+.image img,
+.image video,
+.image span {
+    width: 100%;
+}
+
+.iconBig {
+    font-size: 25px;
+}
