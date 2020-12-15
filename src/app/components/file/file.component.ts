@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../data.service';
+import { DataService } from '../data.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -27,11 +27,11 @@ export class FileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getData();
+//    this.getData();
 
   }
 
-  public getData():any {
+ /* public getData():any {
     this.transformDir();
     this.dataservice.getFileType(this.fileDir, this.dirParam).subscribe(
       response => {
@@ -43,6 +43,8 @@ export class FileComponent implements OnInit {
         if (response.type === 'text'){
           this.responseText = response.data;
           this.responseTextSplitted = this.responseText.split('\n');
+          console.log(this.responseTextSplitted);
+          console.log(this.responseText);
         }
       },
       err => {
@@ -50,7 +52,7 @@ export class FileComponent implements OnInit {
       }
 
     );
-  }
+  }*/
 
   public transformDir(){
     this.route.params.subscribe((params: Params) => {

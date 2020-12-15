@@ -1,0 +1,11 @@
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a class="elementNav btn" [routerLink]="['/link/home']"><i class="fas fa-home"></i>  Mis archivos</a>
+  <a class="elementNav btn"><i class="fas fa-share"></i>  Compartido conmigo</a>
+  <a class="elementNav btn" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+</div>
+
+<div id="main">
+  <button class="openbtn" (click)="openNav()">&#9776;</button>
+</div>
+

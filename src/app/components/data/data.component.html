@@ -1,28 +1,66 @@
-<br>
-<br>
+<nav></nav>
+<br />
+<br />
 
-
-<div class="container">
-
-
-    <h1 class="title text-center">Data Cloud</h1>
+<div class="container content">
+    <h1 class="title text-center">Data Cloud<br> de {{tokenDecoded.usuario.email}}</h1>
     <div class="row">
+        <div class="message failed text-center mb-3" *ngIf="errUpload == true">
+            Error al subir el archivo, vuelve a intentarlo
+        </div>
         <div class="col-md-12">
-            <button class="btn btn-jewel btn-block mt-3 mb-4" [routerLink]="['/upload']">Subir archivos  <i class="fas fa-cloud-upload-alt"></i></button>
-            <button class="btn btn-jewel btn-block mt-3 mb-4" [routerLink]="['/crearCarpeta/' + dirParam]">Crear carpeta   <i class="fas fa-folder-plus"></i></button>
+            <button class="btn btn-jewel btn-block mt-3 mb-4" (click)="showHideUpload()">
+        Subir archivos <i class="fas fa-cloud-upload-alt"></i>
+      </button>
+
+            <div class="container" *ngIf="upload == true">
+                <form [formGroup]="form" (ngSubmit)="submitForm()">
+                    <div class="form-group mx-auto">
+                        <input type="file" (change)="uploadFile($event)">
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-info btn-block btn-lg">Subir <i class="fas fa-cloud-upload-alt"></i></button>
+                    </div>
+                </form>
+            </div>
+            <button class="btn btn-jewel btn-block mt-3 mb-4" (click)="showHideCreateDir()">
+        Crear carpeta <i class="fas fa-folder-plus"></i>
+      </button>
         </div>
     </div>
 
-    <div class="btn btn-void" (click)="goUpDir()" *ngIf="isHome == false"><i class="fas fa-reply"></i> Carpeta anterior</div>
+    <div class="col-md-12">
+        <div class="cardDir createdir" *ngIf="cD == true">
+            <div class="form-group">
+                <label for="nameDir text-center">Nombre de la carpeta:</label>
+                <input class="form-control" id="nameDir" [(ngModel)]="nameNewDir" />
+                <div class="message failed text-center mb-3" *ngIf="errorDir == true">
+                    Nombre para la carpeta no válido
+                </div>
+                <button type="submit" class="btn btn-fuschia btn-block mt-3" (click)="createDir()">
+          Crear
+        </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn btn-void" (click)="goUpDir()" *ngIf="isHome == false">
+        <i class="fas fa-reply"></i> Carpeta anterior
+    </div>
     <div class="row">
         <div class="col-md-4 d-inline mt-4" *ngFor="let dir of dirs">
-            <a class="btn btn-fuschia w-100" (click)="dirClick(dir.name)"><i class="fas fa-folder"></i>  {{dir.name}}</a>
-        </div>
-        <div class="col-md-4 d-inline mt-4" *ngFor="let file of files" [routerLink]="['/archivo', dirParam, file.name]">
-            <span class="btn btn-stark text-fuschia w-100"><i class="fas fa-file-alt"></i>  {{file.name}}</span>
-        </div>
+            <a class="btn btn-fuschia w-100" (click)="dirClick(dir.nombre)"><i class="fas fa-folder"></i> {{ dir.nombre }}</a
+      >
     </div>
-
-
-
+    <div
+      class="col-md-4 d-inline mt-4"
+      *ngFor="let file of files"
+      [routerLink]="['/archivo', dirParam, file.nombre]"
+    >
+      <span class="btn btn-stark text-fuschia w-100"
+        ><i class="fas fa-file-alt"></i> {{ file.nombre }}</span
+      >
+    </div>
+  </div>
 </div>

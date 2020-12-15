@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../data.service';
+import { DataService } from '../data.service';
 import { NgModule } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -25,6 +25,7 @@ public nameNewDir: string
 
   public createDir(){
     this.transformDir()
+    console.log(this.actualDir);
     this._dataService.createDir(this.actualDir, this.nameNewDir)
   }
 
