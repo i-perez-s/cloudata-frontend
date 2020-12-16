@@ -20,6 +20,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { LoginService } from "./services/login.service";
 import { NavComponent } from './components/nav/nav.component';
+import { TextEditComponent } from './components/text-edit/text-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NavComponent } from './components/nav/nav.component';
     LoginComponent,
     SignUpComponent,
     NavComponent,
+    TextEditComponent,
   ],
   imports: [
     BrowserModule,

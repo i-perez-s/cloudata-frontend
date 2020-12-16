@@ -1,19 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" [routerLink]="['/cloudData', fileDir ]"><i class="fas fa-arrow-left ml-3 mt-3 text-fuschia iconBig"></i> Guardar y salir</a>
-    <a class="navbar-brand">Compartir </a>
-</nav>
+<div class="row mb-2">
+  <div class="col-md-12">
+    <nav class="navbar navbar-light bg-light">
+      <ul class="navbar-nav">
+        <li class="nav-item active d-inline">
+          <a class="nav-link" [routerLink]="['/cloudData/', path]"
+            >Guardar y salir <i class="fas fa-save"></i
+          ></a>
+        </li>
+        <li class="nav-item d-inline active">
+          <a class="nav-link">Compartir <i class="fas fa-share-alt"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
 
 <div class="container">
-    <div class="image">
-        <img src="{{url+'getFile/'+ fileDir + '/' + dirParam}}" alt="">
-    </div>
+  <h2 class="text-center">{{ dataFile.nombre }}</h2>
+  <div class="image" *ngIf="typeData == 'img'">
+    <img src="{{ apiRoute }}" alt="" />
+  </div>
 
-    <div *ngIf="isImg == false">
-        <video controls autoplay name="media" class="image">
-        <source src="{{url+'getFile/'+ fileDir + '/' + dirParam}}" type="video/mp4">
-        </video>
-    </div>
+  <div *ngIf="typeData == 'video'">
+    <video controls autoplay name="media" class="image">
+      <source src="{{ apiRoute }}" type="video/mp4" />
+    </video>
+  </div>
+  <div *ngIf="typeData == 'audio'">
+    <video controls autoplay name="media" class="image">
+      <source src="{{ apiRoute }}" type="audio/mpeg" />
+    </video>
+  </div>
 </div>
-<div class="d-block image">
-    <textarea name="" id="textareText" cols="30" rows="10">{{responseText}}</textarea>
-</div>
+
+<text-edit></text-edit>

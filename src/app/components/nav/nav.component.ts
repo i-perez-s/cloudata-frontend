@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { LoginService } from "../../services/login.service";
 
 @Component({
-  selector: "nav",
+  selector: "nab",
   templateUrl: "./nav.component.html",
   styleUrls: ["./nav.component.css"],
   providers: [LoginService],

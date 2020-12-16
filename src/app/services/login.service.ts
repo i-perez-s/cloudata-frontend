@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 @Injectable ()
 export class LoginService{
   public url: string;
+  public dataText: string;
 
   constructor(
     private http: HttpClient,
@@ -44,6 +45,23 @@ export class LoginService{
   }
   decodeToken() {
     return jwt_decode(this.getToken());
+  }
+
+  getDataFile(id:string): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': this.getToken()
+    });
+      return this.http.get(this.url + 'getDataFile/' + id, {headers})
+  }
+
+  setDataText(text: string){
+      this.dataText = text;
+  }
+
+  getDataText(){
+      return this.dataText;
   }
 
 

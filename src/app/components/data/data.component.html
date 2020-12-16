@@ -1,9 +1,7 @@
-<nav></nav>
-<br />
-<br />
+<nab></nab>
 
 <div class="container content">
-    <h1 class="title text-center">Data Cloud<br> de {{tokenDecoded.usuario.email}}</h1>
+    <h1 class="title text-center">Data Cloud<br> de {{tokenDecoded.usuario.name}}</h1>
     <div class="row">
         <div class="message failed text-center mb-3" *ngIf="errUpload == true">
             Error al subir el archivo, vuelve a intentarlo
@@ -56,7 +54,7 @@
     <div
       class="col-md-4 d-inline mt-4"
       *ngFor="let file of files"
-      [routerLink]="['/archivo', dirParam, file.nombre]"
+      [routerLink]="['/archivo', file._id]"
     >
       <span class="btn btn-stark text-fuschia w-100"
         ><i class="fas fa-file-alt"></i> {{ file.nombre }}</span

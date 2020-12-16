@@ -1,4 +1,5 @@
 export const Global = {
-  url: 'http://localhost:8888/'
-  //url: 'http://localhost:5800/'
+  uploadPath:
+    "D:\\Users\\iperez\\Cloud\\Drive\\programacion\\proyectos\\proyectos web\\google drive\\server\\uploads\\",
+  url: "http://localhost:8888/",
 };

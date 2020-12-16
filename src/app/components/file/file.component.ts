@@ -1,67 +1,92 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit,  } from "@angular/core";
+import { DataService } from "../data.service";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { LoginService } from "../../services/login.service";
+import { Global } from "../../config";
+import { UploadService } from "../../services/upload.service";
 
 @Component({
-  selector: 'app-file',
-  templateUrl: './file.component.html',
-  styleUrls: ['./file.component.css'],
-  providers: [DataService]
+  selector: "app-file",
+  templateUrl: "./file.component.html",
+  styleUrls: ["./file.component.css"],
+  providers: [DataService, LoginService, UploadService],
 })
 export class FileComponent implements OnInit {
-  public dirParam: string;
-  public fileDir: string;
-  public url: string = 'http://localhost:8888/';
-  public isImg: boolean;
-  public responseText: string;
-  public responseTextSplitted: any;
-
-  public respose: any;
-
-
+  public id: string;
+  public token: string;
+  public url: string = Global.url;
+  public apiRoute: string;
+  public dataFile: any;
+  public typeData: string;
+  public dataText: string;
+  public pathFile: any;
+  public path: string;
   constructor(
     private dataservice: DataService,
     private route: ActivatedRoute,
-    private router: Router
-
-  ) { }
+    private router: Router,
+    private loginService: LoginService,
+    private uploadService: UploadService
+  ) {}
 
   ngOnInit(): void {
-//    this.getData();
-
+    this.getData();
   }
 
- /* public getData():any {
-    this.transformDir();
-    this.dataservice.getFileType(this.fileDir, this.dirParam).subscribe(
-      response => {
-        if(response.type === 'img' || response.type === 'text'){
-          this.isImg = true
+  public getData() {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params.id;
+    });
+    this.token = this.loginService.getToken();
+    this.apiRoute = `${this.url}getMediaFile/${this.id}?token=${this.token}`;
+    this.loginService.getDataFile(this.id).subscribe(
+      (response) => {
+        this.dataFile = response.filedb;
+        let termination = this.dataFile.nombre.split(".");
+        termination = termination[termination.length - 1];
+        let extImg = ["jpg", "jpeg", "png", "JPG"];
+        let extVid = ["mp4", "m4a"];
+        let extAud = ["mp3", "wav"];
+        if (extImg.includes(termination)) {
+          this.typeData = "img";
+        } else if (extVid.includes(termination)) {
+          this.typeData = "video";
+        } else if (extAud.includes(termination)) {
+          this.typeData = "audio";
         } else {
-          this.isImg = false
+          this.typeData = "text";
+          this.dataservice.getTextContent(this.id).subscribe(
+            (response) => {
+              this.dataText = response.data;
+	      this.uploadService.setDataText(this.dataText)
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         }
-        if (response.type === 'text'){
-          this.responseText = response.data;
-          this.responseTextSplitted = this.responseText.split('\n');
-          console.log(this.responseTextSplitted);
-          console.log(this.responseText);
+        this.pathFile = response.filedb.path.split(Global.uploadPath);
+        this.pathFile.shift();
+        this.pathFile = this.pathFile[0];
+        this.pathFile = this.pathFile.split("\\");
+        if (this.pathFile.length == 1) {
+          this.path = "home";
+        } else {
+          this.pathFile.shift();
+          console.log(this.pathFile);
+          this.path = "";
+          this.pathFile.forEach((element) => {
+            if (this.path == "") {
+              this.path = element;
+            } else {
+              this.path += "-" + element;
+            }
+          });
         }
       },
-      err => {
+      (err) => {
         console.log(err);
       }
-
     );
-  }*/
-
-  public transformDir(){
-    this.route.params.subscribe((params: Params) => {
-      this.dirParam = params.file;
-      this.fileDir = params.path;
-      if(this.fileDir === 'home'){
-        this.fileDir = '';
-      }
-    });
   }
-
 }

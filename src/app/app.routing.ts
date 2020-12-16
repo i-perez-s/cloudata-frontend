@@ -16,7 +16,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   {path: 'cloudData/:dir', component: DataComponent},
-  {path: 'archivo/:path/:file', component: FileComponent},
+  {path: 'archivo/:id', component: FileComponent},
   {path: 'upload', component: UploadFileComponent},
   {path: 'crearCarpeta/:dir', component: CreateDirComponent},
   {path: 'link/:link', component: LinkComponent},

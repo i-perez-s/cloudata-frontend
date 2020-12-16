@@ -26,25 +26,20 @@ export class DataService{
     return this._http.get(this.url + 'getData/' + dir, {headers});
   }
 
-  /*getFile(filePath: string, fileName: string):Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type', 'aplication/json');
-    console.log(this.url + 'getFile/' + filePath + '/' + fileName)
-    return this._http.get(this.url + 'getFile/' + filePath + '/' + fileName, {headers: headers});
-  }
-  getFileType(filePath: string, fileName: string):Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type', 'aplication/json');
-    console.log(this.url + 'getFile/' + filePath + '/' + fileName)
-    return this._http.get(this.url + 'getFileType/' + filePath + '/' + fileName, {headers: headers});
-  }*/
-
-
   createDir(fileDir: string, newNameDir: string):Observable<any>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'token': this.loginService.getToken()
     });
-    console.log(headers)
     return this._http.post<any>(this.url + 'dir/' + fileDir + '/' + newNameDir, null, {headers});
+  }
+
+  getTextContent(id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': this.loginService.getToken()
+    });
+    return this._http.get<any>(this.url + 'getTextFile/' + id, {headers});
   }
 
 
