@@ -1,64 +1,128 @@
 <nab></nab>
 
 <div class="container content">
-    <h1 class="title text-center">Data Cloud<br> de {{tokenDecoded.usuario.name}}</h1>
-    <div class="row">
-        <div class="message failed text-center mb-3" *ngIf="errUpload == true">
-            Error al subir el archivo, vuelve a intentarlo
-        </div>
-        <div class="col-md-12">
-            <button class="btn btn-jewel btn-block mt-3 mb-4" (click)="showHideUpload()">
+  <h1 class="title text-center">
+    Data Cloud<br />
+    de {{ tokenDecoded.usuario.name }}
+  </h1>
+  <div class="row">
+    <div class="message failed text-center mb-3" *ngIf="errUpload == true">
+      Error al subir el archivo, vuelve a intentarlo
+    </div>
+    <div class="col-md-12">
+      <button
+        class="btn btn-jewel btn-block mt-3 mb-4"
+        (click)="showHideUpload()"
+      >
         Subir archivos <i class="fas fa-cloud-upload-alt"></i>
       </button>
 
-            <div class="container" *ngIf="upload == true">
-                <form [formGroup]="form" (ngSubmit)="submitForm()">
-                    <div class="form-group mx-auto">
-                        <input type="file" (change)="uploadFile($event)">
-                    </div>
+      <div class="container" *ngIf="upload == true">
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+          <div class="form-group mx-auto">
+            <input type="file" (change)="uploadFile($event)" />
+          </div>
 
-                    <div class="form-group">
-                        <button class="btn btn-info btn-block btn-lg">Subir <i class="fas fa-cloud-upload-alt"></i></button>
-                    </div>
-                </form>
-            </div>
-            <button class="btn btn-jewel btn-block mt-3 mb-4" (click)="showHideCreateDir()">
+          <div class="form-group">
+            <button class="btn btn-info btn-block btn-lg">
+              Subir <i class="fas fa-cloud-upload-alt"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+      <button
+        class="btn btn-jewel btn-block mt-3 mb-4"
+        (click)="showHideCreateDir()"
+      >
         Crear carpeta <i class="fas fa-folder-plus"></i>
       </button>
-        </div>
     </div>
+  </div>
 
-    <div class="col-md-12">
-        <div class="cardDir createdir" *ngIf="cD == true">
-            <div class="form-group">
-                <label for="nameDir text-center">Nombre de la carpeta:</label>
-                <input class="form-control" id="nameDir" [(ngModel)]="nameNewDir" />
-                <div class="message failed text-center mb-3" *ngIf="errorDir == true">
-                    Nombre para la carpeta no válido
-                </div>
-                <button type="submit" class="btn btn-fuschia btn-block mt-3" (click)="createDir()">
+  <div class="col-md-12">
+    <div class="cardDir createdir" *ngIf="cD == true">
+      <div class="form-group">
+        <label for="nameDir text-center">Nombre de la carpeta:</label>
+        <input class="form-control" id="nameDir" [(ngModel)]="nameNewDir" />
+        <div class="message failed text-center mb-3" *ngIf="errorDir == true">
+          Nombre para la carpeta no válido
+        </div>
+        <button
+          type="submit"
+          class="btn btn-fuschia btn-block mt-3"
+          (click)="createDir()"
+        >
           Crear
         </button>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="btn btn-void" (click)="goUpDir()" *ngIf="isHome == false">
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn btn-void" (click)="goUpDir()" *ngIf="isHome == false">
         <i class="fas fa-reply"></i> Carpeta anterior
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 d-inline mt-4" *ngFor="let dir of dirs">
-            <a class="btn btn-fuschia w-100" (click)="dirClick(dir.nombre)"><i class="fas fa-folder"></i> {{ dir.nombre }}</a
+    <div class="col-md-4">
+      <a (click)="panelShareShow()" class="btn btn-void" *ngIf="isHome == false"
+        ><i class="fas fa-share-alt"></i> Compartir</a
+      >
+    </div>
+    <div class="col-md-4">
+      <a class="btn btn-void" *ngIf="isHome == false" (click)="deleteDir()"
+        ><i class="fas fa-trash"></i> Borrar carpeta</a
+      >
+    </div>
+  </div>
+  <div *ngIf="panelShare == true" class="mt-3">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control w-100"
+        name="filterPost"
+        placeholder="Search..."
+        [(ngModel)]="filterPost"
+      />
+    </div>
+    <span id="box-search" class="ml-auto">
+      <span *ngFor="let user of posts | filter: filterPost" class="li w-100">
+        <div class="row">
+          <div class="col-md-12">
+            <a
+              class="mb-1 btn btn-stark text-center btn-block"
+              (click)="shareFolder(user._id)"
+              ><i class="fas fa-user"></i> {{ user.email }}</a
+            >
+          </div>
+        </div>
+      </span>
+    </span>
+  </div>
+
+  <div
+    class="message failed w-100 text-center mb-3"
+    *ngIf="shareResult === 'false'"
+  >
+    No se ha podido compartir la carpeta, vuelva a probar o intentelo más tarde
+  </div>
+  <div class="message ok w-100 text-center mb-3" *ngIf="shareResult === 'true'">
+    Carpeta compartida con exito
+  </div>
+  <div class="row">
+    <div class="col-md-4 d-inline mt-4" *ngFor="let dir of dirs">
+      <a class="btn btn-fuschia w-100" (click)="dirClick(dir.nombre)"
+        ><i class="fas fa-folder"></i> {{ dir.nombre }}</a
       >
     </div>
     <div
       class="col-md-4 d-inline mt-4"
       *ngFor="let file of files"
-      [routerLink]="['/archivo', file._id]"
+      [routerLink]="['/archivo/mine', file._id]"
     >
-      <span class="btn btn-stark text-fuschia w-100"
-        ><i class="fas fa-file-alt"></i> {{ file.nombre }}</span
-      >
+      <button class="btn btn-stark text-fuschia w-100 h-100">
+        <i class="fas fa-file-alt"></i> {{ file.nombre }}
+      </button>
     </div>
   </div>
 </div>

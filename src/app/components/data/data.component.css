@@ -12,9 +12,13 @@
     padding: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
+    color: white;
 }
 
 .failed {
     background: red;
-    color: white;
+}
+
+.ok {
+    background: green;
 }

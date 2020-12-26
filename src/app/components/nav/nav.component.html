@@ -1,8 +1,9 @@
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  <a class="elementNav btn" [routerLink]="['/link/home']"><i class="fas fa-home"></i>  Mis archivos</a>
-  <a class="elementNav btn"><i class="fas fa-share"></i>  Compartido conmigo</a>
+  <a class="elementNav btn" [routerLink]="['/link/mine/home']"><i class="fas fa-home"></i>  Mis archivos</a>
+  <a class="elementNav btn" [routerLink]="['/link/share/home']"><i class="fas fa-share"></i>  Compartido conmigo</a>
   <a class="elementNav btn" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+  <a class="elementNav btn delete" (click)="deleteUser()"><i class="fas fa-user-times"></i> Borrar cuenta</a>
 </div>
 
 <div id="main">

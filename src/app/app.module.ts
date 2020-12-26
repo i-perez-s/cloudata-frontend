@@ -12,7 +12,9 @@ import { FileComponent } from "./components/file/file.component";
 import { CreateDirComponent } from "./components/create-dir/create-dir.component";
 import { UploadFileComponent } from "./components/upload-file/upload-file.component";
 
+import { FilterPipe } from "./filterPipe"
 import { UploadService } from "./services/upload.service";
+import { ShareService } from "./services/share.service";
 import { DataService } from "./components/data.service";
 import { LinkComponent } from "./components/link/link.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -21,6 +23,7 @@ import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { LoginService } from "./services/login.service";
 import { NavComponent } from './components/nav/nav.component';
 import { TextEditComponent } from './components/text-edit/text-edit.component';
+import { ShareComponent } from './components/share/share.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { TextEditComponent } from './components/text-edit/text-edit.component';
     SignUpComponent,
     NavComponent,
     TextEditComponent,
+    FilterPipe,
+    ShareComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,7 @@ import { TextEditComponent } from './components/text-edit/text-edit.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [appRoutingProviders, UploadService, DataService, LoginService],
+  providers: [appRoutingProviders, UploadService, DataService, LoginService, ShareService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

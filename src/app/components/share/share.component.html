@@ -1,0 +1,24 @@
+<nab></nab>
+
+<h1 class="tittle text-center">Compartido conmigo</h1>
+<div class="container">
+  <div class="btn btn-void" (click)="goUpDir()" *ngIf="isHome == false">
+    <i class="fas fa-reply"></i> Carpeta anterior
+  </div>
+  <div class="row">
+    <div class="col-md-4 d-inline mt-4" *ngFor="let dir of dirs">
+      <a class="btn btn-fuschia w-100" (click)="dirClick(dir._id)"
+        ><i class="fas fa-folder"></i> {{ dir.nombre }}</a
+      >
+    </div>
+    <div
+      class="col-md-4 d-inline mt-4"
+      *ngFor="let file of files"
+      [routerLink]="['/archivo/shared', file._id]"
+    >
+      <button class="btn btn-stark text-fuschia w-100 h-100">
+        <i class="fas fa-file-alt"></i> {{ file.nombre }}
+      </button>
+    </div>
+  </div>
+</div>

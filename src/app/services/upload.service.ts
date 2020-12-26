@@ -6,8 +6,8 @@ import { LoginService } from "./login.service";
 export class UploadService {
   public url: string;
 
-  public dataText: any;
 
+  public data: any = {data: ''};
   constructor(private http: HttpClient, private loginService: LoginService) {
     this.url = "http://localhost:8888/";
   }
@@ -22,14 +22,11 @@ export class UploadService {
     });
   }
 
-
-  setDataText(text: string){
-      this.dataText = text;
-      console.log(this.dataText)
+  set datas(dataText){
+      this.data.data = `${dataText}`
   }
 
-  getDataText(){
-      console.log(this.dataText)
-      return this.dataText;
+  get datag(){
+      return this.data;
   }
 }

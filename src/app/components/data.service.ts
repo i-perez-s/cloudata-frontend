@@ -42,5 +42,28 @@ export class DataService{
     return this._http.get<any>(this.url + 'getTextFile/' + id, {headers});
   }
 
+  deleteFile(id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': this.loginService.getToken()
+    });
 
+    return this._http.delete(`${this.url}file/${id}`, {headers})
+  }
+  deleteDir(id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': this.loginService.getToken()
+    });
+
+    return this._http.delete(`${this.url}dir/${id}`, {headers})
+  }
+
+  deleteUser(idUser: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': this.loginService.getToken()
+    });
+    return this._http.delete(`${this.url}user/${idUser}`, {headers})
+  }
 }
